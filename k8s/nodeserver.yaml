@@ -13,6 +13,6 @@ spec:
         app: nodeserver
     spec:
       containers:
-      - name: nodeserver
-        image: chkao777/tsmc-project:nodeserver
-        imagePullPolicy: Always
+        - name: nodeserver
+          image: AaronKFC/tsmc-project:nodeserver
+          imagePullPolicy: Always

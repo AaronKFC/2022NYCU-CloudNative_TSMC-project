@@ -12,9 +12,9 @@ spec:
       template:
         spec:
           containers:
-          - name: crawler
-            image: chkao777/tsmc-project:crawler
-            imagePullPolicy: Always     
+            - name: crawler
+              image: AaronKFC/tsmc-project:crawler
+              imagePullPolicy: Always
           restartPolicy: OnFailure
 ---
 apiVersion: v1
@@ -23,7 +23,7 @@ metadata:
   name: mongo-pvc
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   resources:
     requests:
       storage: 500Mi
@@ -55,18 +55,18 @@ spec:
         app: mongo
     spec:
       containers:
-      - name: mongo
-        image: mongo
-        imagePullPolicy: IfNotPresent 
-        ports:
-          - containerPort: 27017
-        volumeMounts:
-        - mountPath: /data/db
-          name: mongo-data
+        - name: mongo
+          image: mongo
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongo-data
       volumes:
-      - name: mongo-data
-        persistentVolumeClaim:
-          claimName: mongo-pvc
+        - name: mongo-data
+          persistentVolumeClaim:
+            claimName: mongo-pvc
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -89,15 +89,15 @@ spec:
         tier: backend
     spec:
       containers:
-      - name: leader
-        image: redis:alpine
-        imagePullPolicy: IfNotPresent
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-        ports:
-        - containerPort: 6379
+        - name: leader
+          image: redis:alpine
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 6379
 ---
 apiVersion: v1
 kind: Service
@@ -109,8 +109,8 @@ metadata:
     tier: backend
 spec:
   ports:
-  - port: 6379
-    targetPort: 6379
+    - port: 6379
+      targetPort: 6379
   selector:
     app: redis
     role: leader
@@ -132,9 +132,9 @@ spec:
     spec:
       hostNetwork: true
       containers:
-      - name: worker
-        image: chkao777/tsmc-project:worker
-        imagePullPolicy: Always 
+        - name: worker
+          image: AaronKFC/tsmc-project:worker
+          imagePullPolicy: Always
 
 ---
 apiVersion: apps/v1
@@ -153,9 +153,9 @@ spec:
     spec:
       hostNetwork: true
       containers:
-      - name: nodeserver
-        image: chkao777/tsmc-project:nodeserver
-        imagePullPolicy: Always
+        - name: nodeserver
+          image: AaronKFC/tsmc-project:nodeserver
+          imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
@@ -171,21 +171,21 @@ spec:
       targetPort: 3000
       nodePort: 30036
 ---
-apiVersion: networking.k8s.io/v1 
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nodeserver-ingress
 spec:
   rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: nodeserver-service
-            port:
-              number: 3000
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nodeserver-service
+                port:
+                  number: 3000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -195,8 +195,8 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-        app: rq-dashboard
-        tier: frontend
+      app: rq-dashboard
+      tier: frontend
   template:
     metadata:
       labels:
@@ -204,17 +204,17 @@ spec:
         tier: frontend
     spec:
       containers:
-      - name: rq-dashboard
-        image: docker.io/jayzhan/tsmc-project:rq-dashboard
-        env:
-        - name: GET_HOSTS_FROM
-          value: "dns"
-        resources:
-          requests:
-            cpu: 100m
-            memory: 100Mi
-        ports:
-        - containerPort: 5000
+        - name: rq-dashboard
+          image: docker.io/jayzhan/tsmc-project:rq-dashboard
+          env:
+            - name: GET_HOSTS_FROM
+              value: "dns"
+          resources:
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          ports:
+            - containerPort: 5000
 ---
 apiVersion: v1
 kind: Service
@@ -226,7 +226,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 5000  
+    - port: 5000
   selector:
     app: rq-dashboard
     tier: frontend
