@@ -13,7 +13,7 @@ spec:
         spec:
           containers:
             - name: crawler
-              image: AaronKFC/tsmc-project:crawler
+              image: aaronkfc/tsmc-project:crawler
               imagePullPolicy: Always
           restartPolicy: OnFailure
 ---
@@ -133,7 +133,7 @@ spec:
       hostNetwork: true
       containers:
         - name: worker
-          image: AaronKFC/tsmc-project:worker
+          image: aaronkfc/tsmc-project:worker
           imagePullPolicy: Always
 
 ---
@@ -154,7 +154,7 @@ spec:
       hostNetwork: true
       containers:
         - name: nodeserver
-          image: AaronKFC/tsmc-project:nodeserver
+          image: aaronkfc/tsmc-project:nodeserver
           imagePullPolicy: Always
 ---
 apiVersion: v1
