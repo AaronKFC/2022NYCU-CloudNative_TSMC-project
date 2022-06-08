@@ -13,6 +13,6 @@ spec:
         spec:
           containers:
             - name: crawler
-              image: aaronkfc/tsmc-project:crawler
+              image: aiallen/tsmc-project:crawler
               imagePullPolicy: Always
           restartPolicy: OnFailure

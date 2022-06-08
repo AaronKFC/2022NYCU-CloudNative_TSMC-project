@@ -1,4 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - deploy.yaml
+  - crawler.yaml
+  - mongo.yaml
+  - mongo-pvc.yaml
+  - monogo-service.yaml
+  - nodeserver.yaml
+  - nodeserver-ingress.yaml
+  - nodeserver-service.yaml
+  - redis.yaml
+  - redis-service.yaml
+  - rq-dashboard.yaml
+  - rq-dashboard-service.yaml
+  - worker.yaml
