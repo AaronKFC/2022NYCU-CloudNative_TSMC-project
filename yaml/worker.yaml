@@ -13,6 +13,6 @@ spec:
         app: single-worker
     spec:
       containers:
-      - name: worker
-        image: chkao777/tsmc-project:worker
-        imagePullPolicy: Always      
+        - name: worker
+          image: aaronkfc/tsmc-project:worker
+          imagePullPolicy: Always

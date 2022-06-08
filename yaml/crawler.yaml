@@ -12,8 +12,7 @@ spec:
       template:
         spec:
           containers:
-          - name: crawler
-            image: chkao777/tsmc-project:crawler
-            imagePullPolicy: Always     
+            - name: crawler
+              image: aaronkfc/tsmc-project:crawler
+              imagePullPolicy: Always
           restartPolicy: OnFailure
-          
