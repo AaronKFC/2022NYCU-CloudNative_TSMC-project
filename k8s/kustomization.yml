@@ -4,7 +4,7 @@ resources:
   - crawler.yaml
   - mongo.yaml
   - mongo-pvc.yaml
-  - monogo-service.yaml
+  - mongo-service.yaml
   - nodeserver.yaml
   - nodeserver-ingress.yaml
   - nodeserver-service.yaml
