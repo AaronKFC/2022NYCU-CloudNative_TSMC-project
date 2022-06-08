@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   web:
-    image: AaronKFC/tsmc-project:rq-dashboard
+    image: aaronkfc/tsmc-project:rq-dashboard
     build:
       context: .
       target: web
@@ -13,13 +13,13 @@ services:
       FLASK_ENV: development
 
   nodeserver:
-    image: AaronKFC/tsmc-project:nodeserver
+    image: aaronkfc/tsmc-project:nodeserver
     build:
       context: .
       target: nodeserver
 
   crawler:
-    image: AaronKFC/tsmc-project:crawler
+    image: aaronkfc/tsmc-project:crawler
     build:
       context: .
       target: crawler
@@ -27,13 +27,13 @@ services:
     #   - ./crawler:/tsmc-project/crawler
 
   crawler-controller:
-    image: AaronKFC/tsmc-project:crawler-controller
+    image: aaronkfc/tsmc-project:crawler-controller
     build:
       context: .
       target: crawler-controller
 
   worker:
-    image: AaronKFC/tsmc-project:worker
+    image: aaronkfc/tsmc-project:worker
     build:
       context: .
       target: worker
